@@ -32,7 +32,30 @@ const Register = (req, res) => {
         })
 }
 const Login = (req, res) => {
-    res.send('Login======');
+    User.findOne({ id: req.body.id })
+        .then((resUser) => {
+            if (!resUser) {
+                res.send({
+                    success: false,
+                    error: '该账户未注册'
+                })
+            } else if (req.body.password === resUser.password) {
+                req.session.user = resUser;
+                res.json({
+                    success: true,
+                    message: "登录成功",
+                    name: resUser.name,
+                });
+            } else {
+                res.json({
+                    success: false,
+                    message: "密码错误"
+                });
+            }
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }
 
 router.post('/register', Register);
