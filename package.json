@@ -1,8 +1,9 @@
 {
-  "name": "hackthon-road",
+  "name": "hackthon-route",
   "version": "1.0.0",
-  "description": "#### Description 公路黑客松",
-  "main": "index.js",
+  "description": "",
+  "author": "HelenYin",
+  "private": true,
   "scripts": {
     "dev": "node build/dev-server.js",
     "server": "gulp server",
@@ -65,15 +66,9 @@
     "node": ">= 4.0.0",
     "npm": ">= 3.0.0"
   },
-  "repository": {
-    "type": "git",
-    "url": "git@gitee.com:FengLun/hackthon-road.git"
-  },
-  "keywords": [
-    "nodejs",
-    "vue",
-    "mongodb"
-  ],
-  "author": "HelenYin",
-  "license": "ISC"
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
 }
