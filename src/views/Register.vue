@@ -3,8 +3,8 @@
     <el-row type="flex" justify="center">
       <el-col :span="12">
         <el-form
-         label-position="left" 
-         label-width="80px" 
+         label-position="left"
+         label-width="80px"
          :model="formRegister"
          :rules="rules"
          ref="formRegister">
@@ -85,19 +85,19 @@
         // 表单验证
         this.$refs['formRegister'].validate((valid)=>{
           if(valid){
-            this.$http.post('/api/register',formData)
-            .then(res => {
-              console.dir(res.data)
-              if (res.data.error) {
-                this.$message.error(res.data.error);
-                return false;
-              }else{
-                this.$router.push('/login')
-              }
-            })
-            .catch(err => {
-                this.$message.error(`${err.message}`)
-            })
+            // this.$http.post('/api/register',formData)
+            // .then(res => {
+            //   console.dir(res.data)
+            //   if (res.data.error) {
+            //     this.$message.error(res.data.error);
+            //     return false;
+            //   }else{
+            //     this.$router.push('/login')
+            //   }
+            // })
+            // .catch(err => {
+            //     this.$message.error(`${err.message}`)
+            // })
           }else{
             this.$message.error('表单验证失败!')
             return false;

@@ -34,24 +34,24 @@
     beforeCreate(){
       // 当主页刷新时，如果服务端设置的cookie（包含sessionId）
       // 的时效到了的话，便会提示未登录
-      this.$http.get('/api')
-        .then(res => {
-          console.dir(res.data)
-          if (res.data.error) {
-            this.$message.error(res.data.error);
-            this.user.name = null;
-            return false;
-          }else{
-            let user = localStorage.getItem('user');
-            if (user) {
-              this.user.name = user;
-            }
-          }
-        })
-        .catch(err => {
-            this.$message.error(`${err.message}`)
-        })
-      
+      // this.$http.get('/api')
+        // .then(res => {
+        //   console.dir(res.data)
+        //   if (res.data.error) {
+        //     this.$message.error(res.data.error);
+        //     this.user.name = null;
+        //     return false;
+        //   }else{
+        //     let user = localStorage.getItem('user');
+        //     if (user) {
+        //       this.user.name = user;
+        //     }
+        //   }
+        // })
+        // .catch(err => {
+        //     this.$message.error(`${err.message}`)
+        // })
+
     },
     methods: {
       ...mapActions(['userLoginOut']),
@@ -59,17 +59,17 @@
       loginOut(){
         this.userLoginOut();
         this.user.name = null;
-        this.$http.get('/api/user')
-          .then(res => {
-            console.dir(res.data)
-            if (res.data.message) {
-              this.$message.success(res.data.message);
-              return false;
-            }
-          })
-          .catch(err => {
-              this.$message.error(`${err.message}`)
-          })
+        // this.$http.get('/api/user')
+          // .then(res => {
+          //   console.dir(res.data)
+          //   if (res.data.message) {
+          //     this.$message.success(res.data.message);
+          //     return false;
+          //   }
+          // })
+          // .catch(err => {
+          //     this.$message.error(`${err.message}`)
+          // })
       }
     }
   }

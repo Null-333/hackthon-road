@@ -2,9 +2,9 @@
   <el-card class="box-card">
     <el-row type="flex" justify="center">
       <el-col :span="12">
-        <el-form 
-          label-position="left" 
-          label-width="80px" 
+        <el-form
+          label-position="left"
+          label-width="80px"
           :model="formLogin"
           :rules="rules"
           ref="formLogin">
@@ -87,37 +87,37 @@
       ...mapActions(['userLogin']),
       // 向登录接口发起请求
       login(){
-        let user = this.formLogin;
-        let formData = {
-          name: user.name,
-          password: user.password
-        };
+        // let user = this.formLogin;
+        // let formData = {
+        //   name: user.name,
+        //   password: user.password
+        // };
         // 表单验证
-        this.$refs['formLogin'].validate((valid) => {
-          if (valid) {
-            // 通过验证之后才请求登录接口
-            this.$http.post('/api/login',formData)
-                .then(res => {
-                    console.dir(res.data)
-                    if (res.data.success) {
-                      this.userLogin(res.data);
-                      this.$message.success(`${res.data.message}`)
-                      // 登录成功 跳转至首页
-                      // this.$router.push({name:'Home'}) 
-                      this.$router.push('/')
-                    }else{
-                      this.$message.error(`${res.data.message}`);
-                      return false;
-                    }
-                })
-                .catch(err => {
-                    this.$message.error(`${err.message}`, 'ERROR!')
-                })
-          } else {
-            this.$message.error('表单验证失败!')
-            return false;
-          }
-        });
+        // this.$refs['formLogin'].validate((valid) => {
+        //   if (valid) {
+        //     // 通过验证之后才请求登录接口
+        //     this.$http.post('/api/login',formData)
+        //         .then(res => {
+        //             console.dir(res.data)
+        //             if (res.data.success) {
+        //               this.userLogin(res.data);
+        //               this.$message.success(`${res.data.message}`)
+        //               // 登录成功 跳转至首页
+        //               // this.$router.push({name:'Home'})
+        //               this.$router.push('/')
+        //             }else{
+        //               this.$message.error(`${res.data.message}`);
+        //               return false;
+        //             }
+        //         })
+        //         .catch(err => {
+        //             this.$message.error(`${err.message}`, 'ERROR!')
+        //         })
+        //   } else {
+        //     this.$message.error('表单验证失败!')
+        //     return false;
+        //   }
+        // });
       },
       // 表单重置
       resetForm(){
