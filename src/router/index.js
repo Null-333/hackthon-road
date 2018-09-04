@@ -3,6 +3,8 @@ import Router from 'vue-router'
 // import axios from 'axios'
 import store from '@/store/index.js'
 import Home from '@/views/Home'
+import Order from '@/views/Order'
+import Truck from '@/views/Truck'
 import Login from '@/views/Login'
 import Register from '@/views/Register'
 
@@ -28,7 +30,20 @@ const router = new Router({
             path: '/home',
             name: 'home',
             component: Home,
+            children: [
+                {
+                    path: 'order',
+                    name: 'order',
+                    component: Order,
+                },
+                {
+                    path: 'truck',
+                    name: 'truck',
+                    component: Truck,
+                },
+            ]
         },
+
     ]
 })
 

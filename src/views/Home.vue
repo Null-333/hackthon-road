@@ -1,14 +1,17 @@
 <template>
   <div>
     <el-menu theme="dark" :default-active="activeIndex" class="el-menu-demo" mode="horizontal">
-      <el-menu-item index="1"><router-link to="/">主页</router-link></el-menu-item>
-      <el-menu-item index="2" :style="{float: 'right'}">
-        <a @click="loginOut" href="javascript:;" v-show="!user.id">退出登录</a>
+      <el-menu-item index="1">
+        <router-link to="/home/truck">货车列表</router-link>
+      </el-menu-item>
+      <el-menu-item index="2">
+        <router-link to="/home/order">订单列表</router-link>
+      </el-menu-item>
+      <el-menu-item index="3" :style="{float: 'right'}">
+        <a @click="loginOut" href="javascript:;" v-show="user.id">退出登录</a>
       </el-menu-item>
     </el-menu>
-    <el-card class="box-card">
-      <p>Hello {{user.name}}</p>
-    </el-card>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -19,7 +22,7 @@
       return {
         activeIndex:'1',
         user:{
-          name:''
+          id:''
         }
       }
     },
@@ -28,16 +31,15 @@
       // 的时效到了的话，便会提示未登录
       this.$http.get('/api')
         .then(res => {
-          console.dir(res.data)
           if (res.data.error) {
             this.$message.error(res.data.error);
             this.user.id = null;
+            this.$router.push('/login');
             return false;
           }else{
-            let user = localStorage.getItem('user');
-            if (user) {
-              this.user.name = user;
-            }
+            let id = localStorage.getItem('id');
+            this.$router.push('/home/truck');
+            this.user.id = id;
           }
         })
         .catch(err => {
@@ -55,7 +57,7 @@
           .then(res => {
             if (res.data.message) {
               this.$message.success(res.data.message);
-              return false;
+              this.$router.push('/login');
             }
           })
           .catch(err => {

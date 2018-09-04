@@ -86,7 +86,7 @@
                       this.userLogin(res.data);
                       this.$message.success(`${res.data.message}`)
                       // 登录成功 跳转至首页
-                      this.$router.push('/home')
+                      this.$router.push('/home');
                     }else{
                       this.$message.error(`${res.data.error}`);
                       return false;
