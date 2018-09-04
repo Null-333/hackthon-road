@@ -15,6 +15,7 @@ export const mutations = {
     // 所以还是需要有一个长期在浏览器中保存如登录/登出状态的机制
     // 因此这里采用了localStorage
     // 一定要明白vuex这类库的本质作用，它极大的增加了前端逻辑处理的可能性
+    console.log('data.id', data.id);
     localStorage.setItem('id', data.id);
     // localStorage.setItem('session', data.session.user)
   },

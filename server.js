@@ -9,6 +9,7 @@ const port = process.env.PORT || 3000;
 
 const user = require('./server/router/user');
 const truck = require('./server/router/truck');
+const order = require('./server/router/order');
 
 // url请求解析
 app.use(bodyParser.json());
@@ -58,6 +59,7 @@ app.use(session({
 
 app.use('/api', user);
 app.use('/api', truck);
+app.use('/api', order);
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)
