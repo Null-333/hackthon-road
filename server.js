@@ -50,7 +50,7 @@ app.use(session({
   resave: false,
   saveUninitialized: true,
   cookie: {
-    maxAge: 10000 // 设置返回的cookie时效为30秒，测试用
+    maxAge: 60 * 1000 * 60 // 设置返回的cookie时效为30秒，测试用
   }
   // store: new MongoStore({
   //   url: "mongodb://localhost:27017/usersession"
@@ -60,6 +60,11 @@ app.use(session({
 app.use('/api', user);
 app.use('/api', truck);
 app.use('/api', order);
+
+// 对session判断的中间件
+// app.use((req, res) => {
+//   console.log('req.session:===', req.session);
+// });
 
 app.listen(port, () => {
   console.log(`listening on port ${port}`)

@@ -38,7 +38,7 @@
             return false;
           }else{
             let id = localStorage.getItem('id');
-            this.$router.push('/home/truck');
+            this.activeIndex = this.$route.name === 'truck' ? '1' : '2';
             this.user.id = id;
           }
         })
