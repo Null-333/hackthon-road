@@ -6,7 +6,8 @@ const userSchema = new mongoose.Schema({
         type: String,
         unique: true,
     },
-    password: String
+    password: String,
+    is_sign: Number,
 });
 
 module.exports = mongoose.model('UserSession', userSchema);

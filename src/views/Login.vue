@@ -82,12 +82,11 @@
             // 通过验证之后才请求登录接口
             this.$http.post('/api/login',formData)
                 .then(res => {
-                    console.dir(res.data)
                     if (res.data.success) {
                       this.userLogin(res.data);
                       this.$message.success(`${res.data.message}`)
                       // 登录成功 跳转至首页
-                      this.$router.push('/')
+                      this.$router.push('/home')
                     }else{
                       this.$message.error(`${res.data.error}`);
                       return false;

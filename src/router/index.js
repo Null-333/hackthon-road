@@ -9,27 +9,31 @@ import Register from '@/views/Register'
 Vue.use(Router)
 
 const router = new Router({
-    routes: [{
-        path: '/',
-        name: 'home',
-        // 路由元信息 meta
-        meta: {
-            requireLogin: true // 添加该字段，表示进入这个路由是需要登录的
+    routes: [
+        {
+            path: '/',
+            redirect: '/login',
         },
-        component: Home
-    }, {
-        path: '/login',
-        name: 'login',
-        component: Login
-    }, {
-        path: '/register',
-        name: 'register',
-        component: Register
-    }]
+        {
+            path: '/login',
+            name: 'login',
+            component: Login
+        },
+        {
+            path: '/register',
+            name: 'register',
+            component: Register
+        },
+        {
+            path: '/home',
+            name: 'home',
+            component: Home,
+        },
+    ]
 })
 
 // 设置路由拦截
-// 在vue-router的全局钩子中设置拦截 
+// 在vue-router的全局钩子中设置拦截
 // 每个路由皆会的钩子函数
 // to 进入 from 离开 next 传递
 // 不考虑刷新浏览器的情况，
@@ -50,11 +54,11 @@ const router = new Router({
 //             // next({path:xxx})当前的导航被中断，然后进行一个新的导航
 //             next({
 //                 path: '/login',
-//                 // $router.path 
+//                 // $router.path
 //                 // 一个 key/value 对象，表示 URL 查询参数。
 //                 // 例如，对于路径 /foo?user=1，则有 $route.query.user == 1，
 //                 // 如果没有查询参数，则是个空对象。
-//                 // 假设一开始进入 / (首页)并且没有登录 ，则next进行跳转的路由为/login 
+//                 // 假设一开始进入 / (首页)并且没有登录 ，则next进行跳转的路由为/login
 //                 // 之后登录成功 则redirect => to.fullPath（即为开始进入的路由） => / (首页)
 //                 query: {
 //                     redirect: to.fullPath
@@ -75,7 +79,7 @@ const router = new Router({
 // 1. 任何路由都是可以进行访问，只是进入后会被强制跳转到登录页
 // 2. 当浏览器刷新时，每次都会被重定向至登录页，因为状态会被清空
 // 3. 当服务端的session失效时，但保存在本地localStorage中的user信息无法根据时效自动消除
-// ——————解决方案—————— 
+// ——————解决方案——————
 // 起初，我的方案是在需要登录的页面，比如首页，
 // 在created钩子函数中，
 // 请求后端一个获取session的api，只要页面刷新就会传递请求，

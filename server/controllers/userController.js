@@ -16,7 +16,8 @@ const Register = (req, res) => {
                 const userRegister = new User({
                     name: req.body.name,
                     id: req.body.id,
-                    password: req.body.password
+                    password: req.body.password,
+                    is_sign: 0,
                 });
                 userRegister.save((err, user) => {
                     if (err) {
@@ -31,6 +32,7 @@ const Register = (req, res) => {
             res.send(err);
         })
 }
+
 const Login = (req, res) => {
     User.findOne({ id: req.body.id })
         .then((resUser) => {
@@ -44,7 +46,7 @@ const Login = (req, res) => {
                 res.json({
                     success: true,
                     message: "登录成功",
-                    name: resUser.name,
+                    id: resUser.id,
                 });
             } else {
                 res.json({
@@ -56,9 +58,30 @@ const Login = (req, res) => {
         .catch((err) => {
             console.log(err);
         })
+};
+
+const GetSession = (req, res) => {
+    if (req.session.user) {
+        res.json({
+            session: true
+        });
+    } else {
+        res.json({
+            error: '未登陆'
+        });
+    }
+}
+
+const Logout = (req, res) => {
+    req.session.user = null;
+    res.json({
+        message: '退出成功'
+    });
 }
 
 router.post('/register', Register);
 router.post('/login', Login);
+router.get('/logout', Logout);
+router.get('/', GetSession);
 
 module.exports = router;
