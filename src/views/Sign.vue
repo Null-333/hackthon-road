@@ -10,8 +10,12 @@
     export default {
         methods: {
             sign() {
-                // contractInstance.
-                console.log('1111')
+                const name = window.localStorage.getItem('userName');
+                const idCard = window.localStorage.getItem('userid');
+                const userType = 1;
+                window.contractInstance.methods.sign(name, idCard, userType).send({
+                    from: web3.eth.defaultAccount
+                });
             }
         }
     }

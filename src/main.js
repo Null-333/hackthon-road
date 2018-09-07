@@ -12,12 +12,19 @@ import axios from './util/interceptor.js'
 
 Vue.use(Element);
 
-const Web3 = require('web3');
+import './web3.js';
 const ABI = require('./const/logisticABI');
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+
 const Address = '0x1d38b7293db671353b53e5fc796650e94132d78d';
-const Contract = web3.eth.contract(ABI);
-window.contractInstance = Contract.at(Address);
+
+let web3js = null;
+if (typeof web3 !== 'undefined') {
+    web3js = new Web3(web3.currentProvider);
+    window.contractInstance = new web3js.eth.Contract(ABI, Address);
+} else {
+    console.log('Please install the metaMask.');
+}
+
 
 Vue.prototype.$http = axios;
 

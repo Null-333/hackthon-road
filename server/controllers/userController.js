@@ -54,6 +54,7 @@ const Login = (req, res) => {
                     success: true,
                     message: "登录成功",
                     id: resUser.id,
+                    name: resUser.name,
                 });
             } else {
                 res.json({

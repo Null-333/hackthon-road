@@ -85,6 +85,9 @@
                     if (res.data.success) {
                       this.userLogin(res.data);
                       this.$message.success(`${res.data.message}`)
+                      // 用户id存于localstorage中
+                      window.localStorage.setItem('userid', res.data.id);
+                      window.localStorage.setItem('userName', res.data.name);
                       // 登录成功 跳转至首页
                       this.$router.push('/home');
                     }else{
