@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 // import axios from 'axios'
-import store from '@/store/index.js'
-import Home from '@/views/Home'
-import Order from '@/views/Order'
-import Truck from '@/views/Truck'
-import Login from '@/views/Login'
-import Register from '@/views/Register'
+import store from '@/store/index.js';
+import Home from '@/views/Home';
+import Order from '@/views/Order';
+import Truck from '@/views/Truck';
+import Login from '@/views/Login';
+import Register from '@/views/Register';
+import Sign from '@/views/Sign';
 
 Vue.use(Router)
 
@@ -31,6 +32,11 @@ const router = new Router({
             name: 'home',
             component: Home,
             children: [
+                {
+                    path: 'sign',
+                    name: 'sign',
+                    component: Sign,
+                },
                 {
                     path: 'order',
                     name: 'order',

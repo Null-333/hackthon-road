@@ -1,6 +1,13 @@
 const express = require('express');
-const router = express.Router();
+const Web3 = require('web3');
 const User = require('../schema/user');
+const ABI = require('../const/logisticABI');
+
+const router = express.Router();
+const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
+const Address = '0x1d38b7293db671353b53e5fc796650e94132d78d';
+const Contract = web3.eth.contract(ABI);
+const contractInstance = Contract.at(Address);
 
 // 注册的逻辑，先检查数据库中是否有相同的身份证号
 // 如果没有，则写入数据库中
@@ -79,9 +86,27 @@ const Logout = (req, res) => {
     });
 }
 
+const IsSign = async (req, res) => {
+    if (req.session.user) {
+        const user = await User.findOne({ id: req.session.user.id });
+        const signUser = contractInstance.users.call(user.id);
+        if (signUser[0] === '0x0000000000000000000000000000000000000000') {
+            res.json({
+                message: '未签约'
+            });
+        } else {
+            res.json({
+                message: '已签约',
+            });
+        }
+    }
+    // console.log('req.session.user', req.session.user);
+}
+
 router.post('/register', Register);
 router.post('/login', Login);
 router.get('/logout', Logout);
+router.get('/issign', IsSign);
 router.get('/', GetSession);
 
 module.exports = router;
