@@ -15,7 +15,7 @@ Vue.use(Element);
 import './web3.js';
 const ABI = require('./const/logisticABI');
 
-const Address = '0x1d38b7293db671353b53e5fc796650e94132d78d';
+const Address = '0xf30826f0a321b5d39b364c8863335d588c7d40ce';
 
 let web3js = null;
 if (typeof web3 !== 'undefined') {

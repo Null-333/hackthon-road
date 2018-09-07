@@ -7,14 +7,32 @@
     </div>
 </template>
 <script>
+    let events = null;
     export default {
+        mounted () {
+            window.contractInstance.events.onSign()
+                .on('data', (event) => {
+                    console.log('event', event);
+                });
+        },
         methods: {
             sign() {
                 const name = window.localStorage.getItem('userName');
                 const idCard = window.localStorage.getItem('userid');
                 const userType = 1;
-                window.contractInstance.methods.sign(name, idCard, userType).send({
+                // 首先签约合约，然后更新数据库
+                let signEvent = window.contractInstance.methods.sign(name, idCard, userType).send({
                     from: web3.eth.defaultAccount
+                })
+                signEvent.then((res) => {
+                    const id = res.events.onSign.returnValues.idCard;
+                    const formData = { id };
+                    this.$http.post('/api/updateSign', formData)
+                        .then((res) => {
+                            if (res.data.message === '保存成功') {
+                                this.$router.push({name: 'truck'});
+                            }
+                        })
                 });
             }
         }
