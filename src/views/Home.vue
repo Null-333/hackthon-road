@@ -56,15 +56,11 @@
               .then(res => {
                   if (res.data.message === '已签约') {
                       // 已签约调用货车司机列表
+                      this.$router.push({name: 'truck'});
                   } else {
+                      // 未签约进入签约页面
                       this.$router.push({ name: 'sign' });
-                    // 未签约说明要求用户签约
                   }
-                  // if (res.data.is_sign) {
-                  //     // 如果已经签约则跳转货车司机列表
-                  // } else {
-                  //     // 如果没有签约则点击签约
-                  // }
               })
       },
       // 登出loginOut

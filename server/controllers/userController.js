@@ -4,8 +4,10 @@ const User = require('../schema/user');
 const ABI = require('../const/logisticABI');
 
 const router = express.Router();
-const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:8545"));
-const Address = '0xf30826f0a321b5d39b364c8863335d588c7d40ce';
+
+const web3 = new Web3(new Web3.providers.HttpProvider("https://ropsten.infura.io/v3/f329bd0acda54b87875860bdba06515a"));
+const Address = '0xa29be289dDcE36B10dc50748cfCBD52FbDa851e4';
+
 const Contract = web3.eth.contract(ABI);
 const contractInstance = Contract.at(Address);
 
@@ -20,11 +22,14 @@ const Register = (req, res) => {
                     error: '该账户已注册'
                 })
             } else {
+                const body = req.body;
                 const userRegister = new User({
-                    name: req.body.name,
-                    id: req.body.id,
-                    password: req.body.password,
+                    name: body.name,
+                    id: body.id,
+                    password: body.password,
                     is_sign: 0,
+                    userType: body.userType,
+                    scoreCredit: 60,
                 });
                 userRegister.save((err, user) => {
                     if (err) {
@@ -41,7 +46,7 @@ const Register = (req, res) => {
 }
 
 const Login = (req, res) => {
-    User.findOne({ id: req.body.id })
+    User.findOne({ name: req.body.name })
         .then((resUser) => {
             if (!resUser) {
                 res.send({
@@ -55,6 +60,7 @@ const Login = (req, res) => {
                     message: "登录成功",
                     id: resUser.id,
                     name: resUser.name,
+                    userType: resUser.userType,
                 });
             } else {
                 res.json({
@@ -106,7 +112,6 @@ const IsSign = async (req, res) => {
 // 将is_sign更新为1，表示已经签约
 const updateSign = async (req, res) => {
     const user = await User.update({ id: req.body.id }, { is_sign: 1 })
-    console.log('user', user);
     res.json({
         message: '保存成功',
     });
