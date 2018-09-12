@@ -2,7 +2,7 @@ import axios from 'axios'
 import router from '@/router'
 import store from '@/store'
 
-axios.default.timeout = 5000
+axios.default.timeout = 10000
 
 
 

@@ -8,28 +8,32 @@ const Safe = require('../schema/safe');
 const Pay = require('../schema/pay');
 
 const getOrder = async(req, res) => {
-    let orders = await Order.find({ custumerIdCard: req.query.userId });
-    let orders1 = [];
-
-    orders.map(async (order, index) => {
-        let order2 = {};
-        const userOne = await User.findOne({ id: order.driverIdCard});
-        order2 = {
-            id: order.id,
-            eth: order.eth,
-            driverIdCard: order.driverIdCard,
-            driverAddr: order.driverAddr,
-            custumerIdCard: order.custumerIdCard,
-            custumerAddr: order.custumerAddr,
-            transactionHash: order.transactionHash,
-            status: order.status,
-            driverName: userOne.name
-        };
-        orders1.push(order2);
-        if ((orders.length - 1) === index) {
-            res.json(orders1);
-        }
-    });
+    Order.find({ custumerIdCard: req.query.userId })
+        .then((orders) => {
+            let orders1 = [];
+            let i = 0
+            orders.map(async (order, index) => {
+                    await User.findOne({ id: order.driverIdCard})
+                        .then((userOne) => {
+                            i++;
+                            order2 = {
+                                id: order.id,
+                                eth: order.eth,
+                                driverIdCard: order.driverIdCard,
+                                driverAddr: order.driverAddr,
+                                custumerIdCard: order.custumerIdCard,
+                                custumerAddr: order.custumerAddr,
+                                transactionHash: order.transactionHash,
+                                status: order.status,
+                                driverName: userOne.name
+                            };
+                            orders1.push(order2);
+                            if (orders.length === i) {
+                                res.json(orders1);
+                            }
+                        })
+            });
+        })
 }
 
 const createOrder = async(req, res) => {

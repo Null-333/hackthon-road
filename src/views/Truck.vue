@@ -1,6 +1,7 @@
 <template>
     <div>
         <el-table
+            v-loading="loading"
             border
             :data="tableData"
             style="width: 100%">
@@ -86,6 +87,7 @@
     export default {
         data() {
             return {
+                loading: true,
                 unitETC: 0.0005,  // ETH
                 unitDriver: 0.01, //ETH
                 insurance: 0.02, //%
@@ -132,8 +134,10 @@
         },
         methods: {
             getTruck() {
+                this.loading = true;
                 this.$http.get('/api/truck')
                     .then((res) => {
+                        this.loading = false;
                         if (res.status === 200) {
                             this.tableData = res.data;
                         } else {

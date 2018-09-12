@@ -1,6 +1,7 @@
 <template>
     <div>
         <el-table
+            v-loading="loading"
             border
             :data="tableData"
             style="width: 100%">
@@ -71,6 +72,7 @@
     export default {
         data() {
             return {
+                loading: true,
                 tableData: [],
             }
         },
@@ -79,6 +81,7 @@
         },
         methods: {
             getOrder() {
+                this.loading = true;
                 const userName = window.localStorage.getItem('userName');
                 const userId = window.localStorage.getItem('id');
                 this.$http.get('/api/order', {
@@ -87,6 +90,7 @@
                     }
                 })
                 .then((res) => {
+                    this.loading = false;
                     if (res.status === 200) {
                         this.tableData = res.data.map((data) => {
                             data.userName = userName;
@@ -115,7 +119,6 @@
                 });
             },
             unconfirm(id) {
-                console.log('window.contractInstance.methods', window.contractInstance.methods);
                 const onConfirmOrder = window.contractInstance.methods.unconfirm(id).send({
                     from: web3.eth.defaultAccount,
                 });
