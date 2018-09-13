@@ -59,7 +59,12 @@
               .then(res => {
                   if (res.data.message === '已签约') {
                       // 已签约调用货车司机列表
-                      this.$router.push({name: 'truck'});
+                      const userType = window.localStorage.getItem('userType');
+                      if (userType === '2') {
+                        this.$router.push({name: 'order'});
+                      } else {
+                        this.$router.push({name: 'truck'});
+                      }
                   } else {
                       // 未签约进入签约页面
                       this.$router.push({ name: 'sign' });

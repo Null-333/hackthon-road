@@ -16,6 +16,7 @@
                 width="180">
             </el-table-column>
             <el-table-column
+                v-if="userType === '1'"
                 prop="userName"
                 label="货主姓名"
                 width="180">
@@ -47,18 +48,21 @@
                 </template>
             </el-table-column>
             <el-table-column
+                v-if="userType === '1'"
                 label="模拟ETC">
                 <template slot-scope="scope">
                     <el-button @click="reduce(scope.row.id)" type="text" size="small">扣除ETC</el-button>
                 </template>
             </el-table-column>
             <el-table-column
+                v-if="userType === '1'"
                 label="理赔">
                 <template slot-scope="scope">
                     <el-button @click="compensate(scope.row.id)" type="text" size="small">理赔</el-button>
                 </template>
             </el-table-column>
             <el-table-column
+                v-if="userType === '1'"
                 label="操作">
                 <template slot-scope="scope" v-if="!scope.row.status">
                     <el-button @click="confirm(scope.row.id)" type="text" size="small">确认</el-button>
@@ -74,6 +78,7 @@
             return {
                 loading: true,
                 tableData: [],
+                userType: window.localStorage.getItem('userType'),
             }
         },
         created() {
@@ -90,7 +95,6 @@
                     }
                 })
                 .then((res) => {
-                    console.log('res', res);
                     this.loading = false;
                     if (res.status === 200) {
                         this.tableData = res.data.map((data) => {
