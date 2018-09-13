@@ -11,9 +11,14 @@
                 width="180">
             </el-table-column>
             <el-table-column
-                prop="name"
                 label="姓名"
                 width="180">
+                <template slot-scope="scope">
+                    <el-button v-if="userType==='1'" @click="$router.push({ name: 'order', query: {id: scope.row.id}})" type="text" size="small">{{scope.row.name}}</el-button>
+                    <template v-else>
+                        {{scope.row.name}}
+                    </template>
+                </template>
             </el-table-column>
             <el-table-column
                 prop="scoreCredit"
@@ -94,6 +99,7 @@
                 tableData: [],
                 dialogVisible: false,
                 detailData: {},
+                userType: window.localStorage.getItem('userType'),
                 fromOptions: [
                     { value: '成都', label: '成都' },
                     { value: '德阳', label: '德阳' },

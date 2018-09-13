@@ -82,13 +82,15 @@
             }
         },
         created() {
-            this.getOrder();
+            console.log('router.query', this.$route.query.id);
+            const driverId = this.$route.query.id
+            this.getOrder(driverId);
         },
         methods: {
-            getOrder() {
+            getOrder(driverId) {
                 this.loading = true;
                 const userName = window.localStorage.getItem('userName');
-                const userId = window.localStorage.getItem('id');
+                const userId = driverId ? driverId : window.localStorage.getItem('id');
                 this.$http.get('/api/order', {
                     params: {
                         userId,
