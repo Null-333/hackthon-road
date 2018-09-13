@@ -159,8 +159,9 @@
                 // 物流合约
                 const onCreateOrderEvent = window.contractInstance.methods.corePay(this.distance, userIdCard, driverData.id, this.ruleForm.goods, this.ruleForm.price).send({
                     from: web3.eth.defaultAccount,
-                    value: sum * 1e18,
-                })
+                    // value: sum * 1e18,
+                    value: 0.001 * 1e18,
+                });
                 this.dialogVisible = false;
                 this.clearData();
                 // 创建order

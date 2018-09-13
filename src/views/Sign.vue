@@ -22,6 +22,8 @@
                 const userType = window.localStorage.getItem('userType');
                 // 首先签约合约，然后更新数据库
                 // 物流合约
+
+                console.log('web3.eth.defaultAccount', web3.eth);
                 let signEvent = window.contractInstance.methods.sign(name, idCard, userType).send({
                     from: web3.eth.defaultAccount
                 })

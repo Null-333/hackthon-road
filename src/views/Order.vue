@@ -90,6 +90,7 @@
                     }
                 })
                 .then((res) => {
+                    console.log('res', res);
                     this.loading = false;
                     if (res.status === 200) {
                         this.tableData = res.data.map((data) => {
