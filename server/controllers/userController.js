@@ -97,7 +97,6 @@ const IsSign = async (req, res) => {
     if (req.session.user) {
         const user = await User.findOne({ id: req.session.user.id });
         const signUser = contractInstance.users.call(user.id);
-        console.log('signUser==', signUser);
         if (signUser[0] === '0x0000000000000000000000000000000000000000') {
             res.json({
                 message: '未签约'

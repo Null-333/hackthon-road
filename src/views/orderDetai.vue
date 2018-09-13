@@ -140,9 +140,11 @@
                     this.detailData = res.data.detail;
                     this.safeData = res.data.safe;
                     // console.log('res.da')
-                    if (res.data) {
+                    if (res.data && res.data.pay) {
                         this.payData = [res.data.pay];
                         console.log('payData', this.payData);
+                    } else {
+                        this.payData = [];
                     }
                 })
         }

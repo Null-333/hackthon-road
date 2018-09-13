@@ -11,6 +11,9 @@
         <a @click="loginOut" href="javascript:;" v-show="user.id">退出登录</a>
       </el-menu-item>
     </el-menu>
+    <div v-if="$route.name === 'home'" class="loading-box">
+      <i class="el-icon-loading"></i>
+    </div>
     <router-view></router-view>
   </div>
 </template>
@@ -81,3 +84,12 @@
     }
   }
 </script>
+<style>
+  .loading-box {
+    height: 300px;
+    border: 1px solid #999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+</style>
