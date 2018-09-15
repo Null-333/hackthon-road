@@ -61,8 +61,10 @@
                       // 已签约调用货车司机列表
                       const userType = window.localStorage.getItem('userType');
                       if (userType === '2') {
+                        this.activeIndex = '2';
                         this.$router.push({name: 'order'});
                       } else {
+                        this.activeIndex = '1';
                         this.$router.push({name: 'truck'});
                       }
                   } else {
