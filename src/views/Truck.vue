@@ -136,6 +136,7 @@
             }
         },
         created() {
+            this.$parent.activeIndex = '1';
             this.getTruck();
         },
         methods: {

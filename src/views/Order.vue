@@ -82,7 +82,7 @@
             }
         },
         created() {
-            console.log('router.query', this.$route.query.id);
+            this.$parent.activeIndex = '2';
             const driverId = this.$route.query.id
             this.getOrder(driverId);
         },
