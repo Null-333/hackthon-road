@@ -16,10 +16,20 @@ const getOrder = async(req, res) => {
             as: 'doc'
         }
     }).then((resItems) => {
+        const userId = req.query.userId;
+        const arr = [];
         resItems.forEach((item) => {
-            item.driverName = item.doc[0].name;
+            if (userId) {
+                if (item.doc[0].id == userId) {
+                    item.driverName = item.doc[0].name;
+                    arr.push(item);
+                }
+            } else {
+                item.driverName = item.doc[0].name;
+                arr.push(item);
+            }
         });
-        res.json(resItems);
+        res.json(arr);
     })
 }
 

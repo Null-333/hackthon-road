@@ -84,13 +84,14 @@
         created() {
             this.$parent.activeIndex = '2';
             const driverId = this.$route.query.id
+            console.log('driverId', driverId);
             this.getOrder(driverId);
         },
         methods: {
             getOrder(driverId) {
                 this.loading = true;
                 const userName = window.localStorage.getItem('userName');
-                const userId = driverId ? driverId : window.localStorage.getItem('id');
+                const userId = driverId ? driverId : '';
                 this.$http.get('/api/order', {
                     params: {
                         userId,
