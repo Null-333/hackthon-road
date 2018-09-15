@@ -18,6 +18,7 @@
         -moz-osx-font-smoothing: grayscale;
         text-align: center;
         color: #2c3e50;
+        height: 100%;
         /* margin-top: 60px; */
     }
     h1, h2 {
@@ -29,7 +30,7 @@
         padding: 0;
 
     }
-    
+
     li {
         /* display: inline-block; */
         margin: 10px;
@@ -39,4 +40,3 @@
         text-decoration: none;
     }
 </style>
-  

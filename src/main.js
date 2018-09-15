@@ -10,6 +10,8 @@ import Element from 'element-ui'
 import 'element-ui/lib/theme-default/index.css'
 import axios from './util/interceptor.js'
 
+import './assets/common.css'
+
 Vue.use(Element);
 
 import './web3.js';
