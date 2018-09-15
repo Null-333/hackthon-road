@@ -50,14 +50,14 @@
             <el-table-column
                 v-if="userType === '1'"
                 label="模拟ETC">
-                <template slot-scope="scope">
+                <template slot-scope="scope" v-if="!scope.row.status">
                     <el-button @click="reduce(scope.row.id)" type="text" size="small">扣除ETC</el-button>
                 </template>
             </el-table-column>
             <el-table-column
                 v-if="userType === '1'"
                 label="理赔">
-                <template slot-scope="scope">
+                <template slot-scope="scope" v-if="!scope.row.status">
                     <el-button @click="compensate(scope.row.id)" type="text" size="small">理赔</el-button>
                 </template>
             </el-table-column>
