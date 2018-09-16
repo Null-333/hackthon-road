@@ -136,6 +136,7 @@
         created() {
             this.$http.get(`/api/orderDetail?id=${this.$route.query.id}`)
                 .then((res) => {
+                    console.log('res', res);
                     this.reduceData = res.data.reduce;
                     this.detailData = res.data.detail;
                     this.safeData = res.data.safe;

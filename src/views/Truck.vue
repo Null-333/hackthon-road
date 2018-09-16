@@ -153,6 +153,7 @@
                     })
             },
             showSign(data) {
+                console.log('data', data);
                 this.from = '';
                 this.to = '';
                 this.dialogVisible = true;
@@ -178,7 +179,7 @@
                         const formData = {
                             customerAddr: returnValue.returnValue,
                             eth: returnValue.eth / 1e18,
-                            id: returnValue.logisticOrderId
+                            id: returnValue.logisticOrderId,
                         }
                         this.$http.post('/api/createETC', formData)
                             .then((res) => {
@@ -212,6 +213,7 @@
                         custumerIdCard: returnData.custumerIdCard,
                         custumerAddr: returnData.custumerAddr,
                         transactionHash: res.events.onCreateOrder.transactionHash,
+                        driverName: driverData.name,
                     };
 
                     this.$http.post('/api/createOrder', formData)

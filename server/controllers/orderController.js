@@ -35,7 +35,8 @@ const getOrder = async(req, res) => {
 
 const createOrder = async(req, res) => {
     const body = req.body;
-    body.driverName = '';
+    body.driverName = body.driverName;
+    console.log('body.driverName', body.driverName);
     body.status = 0;
     const order = new Order(body);
     order.save((err, order) => {
